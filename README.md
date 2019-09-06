@@ -14,7 +14,7 @@ Small [Mountebank](http://www.mbtest.org/) images based on [Alpine Linux](https:
 ```yaml
 services:
   mountebank:
-    image: sunx2ych/mountebank:2.0.0-alpine
+    image: sunx2ych/mountebank:2.1.0-alpine
     expose:
       - 8080  # mock port
     volumes:
