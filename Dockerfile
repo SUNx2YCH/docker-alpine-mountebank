@@ -1,12 +1,21 @@
-FROM node:10-alpine
+FROM alpine:3.10
 
-ARG MOUNTEBANK_VERSION=1.16.0
+ARG MOUNTEBANK_VERSION=2.0.0
 EXPOSE 2525
-WORKDIR /opt/mb
 
-RUN npm install --global --production \
+RUN apk --no-cache add \
+        nodejs \
+        npm \
+    && \
+    npm install --global --production \
         mountebank@${MOUNTEBANK_VERSION} \
     && \
-    npm cache clean --force
+    npm cache clean --force \
+    && \
+    addgroup -g 1000 node \
+    && \
+    adduser -D -G node -u 1000 node
 
+USER node:node
+WORKDIR /home/node
 ENTRYPOINT ["mb"]
